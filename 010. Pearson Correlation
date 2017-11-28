@@ -1,0 +1,31 @@
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def calc_pearson(x, y):
+    std1 = np.std(x)
+    
+    # np.sqrt(np.mean(x**2) - np.mean(x)**2)
+    std2 = np.std(y)
+    cov = np.cov(x, y, bias=True)[0,1]
+    return cov / (std1 * std2)
+
+def pearson(x, y, tip):
+    clrs = list('rgbmyc')
+    plt.figure(figsize=(10,8), facecolor='w')
+    for i, theta in enumerate(np.linspace(0, 90, 6)):
+        xr, yr = rotate(x, y, theta)
+        p = stats.pearsonr(xr, yr)[0]
+        
+        #print calc_pearson(xr, yr)
+        print "Rotation angle: ", theta, "Pearson correlation: ", p
+        str = u'correlation: %.3f' %p
+        plt.scatter(xr, yr, s=40, alpha=0.9, linewidths=0.5, c=clr)
+    
+    plt.legend(loc='upper left', shadow=True)
+    plt.xlabel(u'X')
+    plt.ylabel(u'Y')
+    plt.title(u'Pearson correlation distribution: %s' % tip, fontsize=18)
+    plt.grid(b=True)
+    plt.show()
