@@ -12,16 +12,16 @@ from scipy import special
 n = float(raw_input("The number of people: "))
 prob = (special.perm(365, n)) / (365 ** n)
 
-print("probability of no shared birthdays = ", (1 - prob))
+print("The probability of two shared birthdays = ", (1 - prob))
 
 
 '''
 Method 2, Iteration
 '''
-n = float(raw_input("The number of people: "))
+classSize = int(raw_input("The number of people: "))
 
 prob = 1.0
 for i in range(classSize):
     prob = prob * (365-i)/365
 
-print("probability of no shared birthdays = ", (1 - prob))
+print("The probability of two shared birthdays = ", (1 - prob))
